@@ -25,9 +25,11 @@ namespace KcCauldronCapo.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<CHANT_HISTORY> CHANT_HISTORY { get; set; }
-        public DbSet<CHANT> CHANTS { get; set; }
-        public DbSet<USER> USERs { get; set; }
-        public DbSet<VOTE> VOTES { get; set; }
+        public DbSet<ChantHistory> ChantHistories { get; set; }
+        public DbSet<Chant> CHANTS { get; set; }
+        public DbSet<User> Users1 { get; set; }
+        public DbSet<Vote> VOTES { get; set; }
+        public DbSet<CURRENT_DAY_USERS> CURRENT_DAY_USERS { get; set; }
+        public DbSet<CURRENT_VOTES> CURRENT_VOTES { get; set; }
     }
 }
