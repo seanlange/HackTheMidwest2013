@@ -12,14 +12,10 @@ namespace KcCauldronCapo.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Vote
+    public partial class CURRENT_DAY_USERS
     {
-        public int VOTE_ID { get; set; }
-        public int CHANT_ID { get; set; }
-        public System.DateTime DATE_ADDED_DT_TM { get; set; }
         public int USER_ID { get; set; }
-    
-        public virtual Chant Chant { get; set; }
-        public virtual User User { get; set; }
+        public string PHONE_NUMBER { get; set; }
+        public string SECTION { get; set; }
     }
 }

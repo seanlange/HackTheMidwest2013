@@ -12,12 +12,11 @@ namespace KcCauldronCapo.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CHANT
+    public partial class Chant
     {
-        public CHANT()
+        public Chant()
         {
-            this.CHANT_HISTORY = new HashSet<CHANT_HISTORY>();
-            this.VOTES = new HashSet<VOTE>();
+            this.Votes = new HashSet<Vote>();
         }
     
         public int CHANT_ID { get; set; }
@@ -27,7 +26,6 @@ namespace KcCauldronCapo.Model
         public string LISTENLINK { get; set; }
         public string HISTORY { get; set; }
     
-        public virtual ICollection<CHANT_HISTORY> CHANT_HISTORY { get; set; }
-        public virtual ICollection<VOTE> VOTES { get; set; }
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

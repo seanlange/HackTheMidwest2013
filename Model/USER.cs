@@ -12,11 +12,11 @@ namespace KcCauldronCapo.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class USER
+    public partial class User
     {
-        public USER()
+        public User()
         {
-            this.VOTES = new HashSet<VOTE>();
+            this.Votes = new HashSet<Vote>();
         }
     
         public int USER_ID { get; set; }
@@ -24,6 +24,6 @@ namespace KcCauldronCapo.Model
         public string PHONE_NUMBER { get; set; }
         public string SECTION { get; set; }
     
-        public virtual ICollection<VOTE> VOTES { get; set; }
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

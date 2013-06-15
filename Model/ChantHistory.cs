@@ -12,12 +12,12 @@ namespace KcCauldronCapo.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CHANT_HISTORY
+    public partial class ChantHistory
     {
         public int CHANT_HISTORY_ID { get; set; }
         public int CHANT_ID { get; set; }
         public System.DateTime DATE_PLAYED_DT_TM { get; set; }
     
-        public virtual CHANT CHANT { get; set; }
+        public virtual Chant Chant { get; set; }
     }
 }
