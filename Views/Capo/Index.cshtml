@@ -1,13 +1,16 @@
-﻿@model IEnumerable<KcCauldronCapo.Model.Chant>
+﻿@model IEnumerable<KcCauldronCapo.Model.CHANT_COUNT>
+
 
 
 <button class="btn btn-info" onclick="ClearVotes(); return false;">Clear Votes</button>
 
 <br/>
 <div class="container-fluid">
+
     @foreach (var chant in Model)
     {
-        <button class="btn btn-large btn-block" onclick="SetCurrentChant(@chant.CHANT_ID); return false;">@chant.CHANT_NAME</button>
+        <button class="btn btn-large btn-block" onclick="SetCurrentChant(@chant.CHANT_ID); return false;">@chant.CHANT_NAME    (@chant.COUNT) </button>
+        
     }
 </div>
 

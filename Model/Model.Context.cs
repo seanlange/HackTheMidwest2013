@@ -31,5 +31,6 @@ namespace KcCauldronCapo.Model
         public DbSet<Vote> VOTES { get; set; }
         public DbSet<Alert> ALERTS { get; set; }
         public DbSet<USER_SUBMITTED_IDEAS> USER_SUBMITTED_IDEAS { get; set; }
+        public DbSet<CHANT_COUNT> CHANT_COUNT { get; set; }
     }
 }

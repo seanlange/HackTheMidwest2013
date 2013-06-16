@@ -12,6 +12,13 @@
           <EntitySet Name="USER" EntityType="Hackathon_TestModel.Store.USER" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="USER_SUBMITTED_IDEAS" EntityType="Hackathon_TestModel.Store.USER_SUBMITTED_IDEAS" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="VOTES" EntityType="Hackathon_TestModel.Store.VOTES" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CHANT_COUNT" EntityType="Hackathon_TestModel.Store.CHANT_COUNT" store:Type="Views" store:Schema="dbo" store:Name="CHANT_COUNT">
+            <DefiningQuery>SELECT 
+      [CHANT_COUNT].[CHANT_ID] AS [CHANT_ID], 
+      [CHANT_COUNT].[COUNT] AS [COUNT], 
+      [CHANT_COUNT].[CHANT_NAME] AS [CHANT_NAME]
+      FROM [dbo].[CHANT_COUNT] AS [CHANT_COUNT]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_CHANT_HISTORY_0" Association="Hackathon_TestModel.Store.FK_CHANT_HISTORY_0">
             <End Role="CHANTS" EntitySet="CHANTS" />
             <End Role="CHANT_HISTORY" EntitySet="CHANT_HISTORY" />
@@ -82,6 +89,18 @@
           <Property Name="DATE_ADDED_DT_TM" Type="datetime2" Nullable="false" />
           <Property Name="USER_ID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Hackathon_Test.dbo.CHANT_COUNT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="CHANT_COUNT">
+          <Key>
+            <PropertyRef Name="CHANT_ID" />
+            <PropertyRef Name="CHANT_NAME" />
+          </Key>
+          <Property Name="CHANT_ID" Type="int" Nullable="false" />
+          <Property Name="COUNT" Type="int" />
+          <Property Name="CHANT_NAME" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_CHANT_HISTORY_0">
           <End Role="CHANTS" Type="Hackathon_TestModel.Store.CHANTS" Multiplicity="1" />
           <End Role="CHANT_HISTORY" Type="Hackathon_TestModel.Store.CHANT_HISTORY" Multiplicity="*" />
@@ -145,6 +164,7 @@
             <End Role="User" EntitySet="Users1" />
             <End Role="USER_SUBMITTED_IDEAS" EntitySet="USER_SUBMITTED_IDEAS" />
           </AssociationSet>
+          <EntitySet Name="CHANT_COUNT" EntityType="Hackathon_TestModel.CHANT_COUNT" />
         </EntityContainer>
         <EntityType Name="ChantHistory">
           <Key>
@@ -258,6 +278,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CHANT_COUNT">
+          <Key>
+            <PropertyRef Name="CHANT_ID" />
+            <PropertyRef Name="CHANT_NAME" />
+          </Key>
+          <Property Type="Int32" Name="CHANT_ID" Nullable="false" />
+          <Property Type="Int32" Name="COUNT" />
+          <Property Type="String" Name="CHANT_NAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -324,6 +353,15 @@
                 <ScalarProperty Name="LYRICS" ColumnName="LYRICS" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
                 <ScalarProperty Name="USER_SUBMITTED_IDEAS_ID" ColumnName="USER_SUBMITTED_IDEAS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHANT_COUNT">
+            <EntityTypeMapping TypeName="Hackathon_TestModel.CHANT_COUNT">
+              <MappingFragment StoreEntitySet="CHANT_COUNT">
+                <ScalarProperty Name="CHANT_NAME" ColumnName="CHANT_NAME" />
+                <ScalarProperty Name="COUNT" ColumnName="COUNT" />
+                <ScalarProperty Name="CHANT_ID" ColumnName="CHANT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

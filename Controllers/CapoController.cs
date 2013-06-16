@@ -13,7 +13,7 @@ namespace KcCauldronCapo.Controllers
             entities.Configuration.LazyLoadingEnabled = false;
 
             var chants = entities
-                .CHANTS
+                .CHANT_COUNT
                 .OrderBy(c => c.CHANT_NAME)
                 .ToList();
 
