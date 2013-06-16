@@ -15,26 +15,33 @@ namespace KcCauldronCapo.Controllers
         [HttpPost]
         public ActionResult SubmitSong(string message)
         {
-            var userID = Request.Cookies["userId"].Value;
-
-
-            var userSubmission = new USER_SUBMITTED_IDEAS
-            {
-                SUBMISSION_DT_TM = DateTime.Now,
-                USER_ID = Convert.ToInt32(userID),
-                LYRICS = message
-
-            };
-
             var entities = new Hackathon_TestEntities();
-            entities.USER_SUBMITTED_IDEAS.Add(userSubmission);
-            entities.SaveChanges();
+            if (Request.Cookies["userId"] != null)
+            {
+                var userID = Request.Cookies["userId"].Value;
 
-            var submissionList = entities
-                .USER_SUBMITTED_IDEAS
-                .ToList();
+
+                var userSubmission = new USER_SUBMITTED_IDEAS
+                {
+                    SUBMISSION_DT_TM = DateTime.Now,
+                    USER_ID = Convert.ToInt32(userID),
+                    LYRICS = message
+
+                };
+                
+                entities.USER_SUBMITTED_IDEAS.Add(userSubmission);
+                entities.SaveChanges();
+            }
+                
+
+                var submissionList = entities
+                    .USER_SUBMITTED_IDEAS
+                    .ToList();
+            
 
             return View("Index", submissionList);
+            
+
         }
 
 

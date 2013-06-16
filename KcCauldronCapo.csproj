@@ -293,6 +293,8 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\kccauldron-capo - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\kccauldron-capo - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\kccauldron-capo.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\apprise-1.5.min.js" />

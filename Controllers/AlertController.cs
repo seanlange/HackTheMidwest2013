@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using KcCauldronCapo.Model;
 using Twilio;
 using System.Web.Configuration;
+using System.Text.RegularExpressions;
 
 
 namespace KcCauldronCapo.Controllers
@@ -32,9 +33,17 @@ namespace KcCauldronCapo.Controllers
                 var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
                 var formattedPhoneNumber = "+1" + user.PHONE_NUMBER;
+                string pat = "^[+][0-9]{11}";
 
-                var textMsg = twilio.SendSmsMessage(fromNumber, formattedPhoneNumber, message, "");
- 
+                // Instantiate the regular expression object.
+                Regex r = new Regex(pat, RegexOptions.IgnoreCase);
+
+                // Match the regular expression pattern against a text string.
+                Match m = r.Match(formattedPhoneNumber);
+                if (m.Success)
+                {
+                    var textMsg = twilio.SendSmsMessage(fromNumber, formattedPhoneNumber, message, "");
+                }
             }
 
             return View("Index");
