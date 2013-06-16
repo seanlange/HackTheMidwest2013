@@ -26,10 +26,6 @@
       [CURRENT_VOTES].[PERCENT] AS [PERCENT]
       FROM [dbo].[CURRENT_VOTES] AS [CURRENT_VOTES]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_CHANT_HISTORY_0" Association="Hackathon_TestModel.Store.FK_CHANT_HISTORY_0">
-            <End Role="CHANTS" EntitySet="CHANTS" />
-            <End Role="CHANT_HISTORY" EntitySet="CHANT_HISTORY" />
-          </AssociationSet>
           <AssociationSet Name="FK_VOTES_0" Association="Hackathon_TestModel.Store.FK_VOTES_0">
             <End Role="USER" EntitySet="USER" />
             <End Role="VOTES" EntitySet="VOTES" />
@@ -43,7 +39,7 @@
           <Key>
             <PropertyRef Name="CHANT_HISTORY_ID" />
           </Key>
-          <Property Name="CHANT_HISTORY_ID" Type="int" Nullable="false" />
+          <Property Name="CHANT_HISTORY_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CHANT_ID" Type="int" Nullable="false" />
           <Property Name="DATE_PLAYED_DT_TM" Type="datetime2" Nullable="false" />
         </EntityType>
@@ -85,7 +81,7 @@
             <PropertyRef Name="PHONE_NUMBER" />
           </Key>
           <Property Name="USER_ID" Type="int" Nullable="false" />
-          <Property Name="PHONE_NUMBER" Type="nvarchar" Nullable="false" MaxLength="11" />
+          <Property Name="PHONE_NUMBER" Type="nvarchar" Nullable="false" MaxLength="13" />
           <Property Name="SECTION" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -102,18 +98,6 @@
           <Property Name="COUNT" Type="float" />
           <Property Name="PERCENT" Type="varchar" MaxLength="6" />
         </EntityType>
-        <Association Name="FK_CHANT_HISTORY_0">
-          <End Role="CHANTS" Type="Hackathon_TestModel.Store.CHANTS" Multiplicity="1" />
-          <End Role="CHANT_HISTORY" Type="Hackathon_TestModel.Store.CHANT_HISTORY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CHANTS">
-              <PropertyRef Name="CHANT_ID" />
-            </Principal>
-            <Dependent Role="CHANT_HISTORY">
-              <PropertyRef Name="CHANT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_VOTES_0">
           <End Role="USER" Type="Hackathon_TestModel.Store.USER" Multiplicity="1" />
           <End Role="VOTES" Type="Hackathon_TestModel.Store.VOTES" Multiplicity="*" />
@@ -246,7 +230,7 @@
             <PropertyRef Name="PHONE_NUMBER" />
           </Key>
           <Property Type="Int32" Name="USER_ID" Nullable="false" />
-          <Property Type="String" Name="PHONE_NUMBER" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PHONE_NUMBER" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="SECTION" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CURRENT_VOTES">
