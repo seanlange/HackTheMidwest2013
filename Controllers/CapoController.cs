@@ -53,7 +53,12 @@ namespace KcCauldronCapo.Controllers
             entities.ChantHistories.Add(chantHistory);
             entities.SaveChanges();
 
-            return new EmptyResult();
+            var chants = entities
+            .CHANT_COUNT
+            .OrderBy(c => c.CHANT_NAME)
+            .ToList();
+
+            return View("Index",chants);
         }
 
         [HttpPost]
