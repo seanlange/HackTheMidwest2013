@@ -10,17 +10,23 @@ $(document).ready(function () {
 
     $("#btn-lyrics").click(function () {
         context["current-chant-detail"] = "lyrics";
-        $('div.chant-detail').html(context["current-chant"].LYRICS);
+
+        if (context["current-chant"].LYRICS != null)
+            $('div.chant-detail').html(context["current-chant"].LYRICS.replace(/(\r\n|\n|\r)/gm, "<br>"));
     });
     
     $("#btn-history").click(function () {
         context["current-chant-detail"] = "history";
-        $('div.chant-detail').html(context["current-chant"].HISTORY);
+
+        if (context["current-chant"].HISTORY != null)
+            $('div.chant-detail').html(context["current-chant"].HISTORY);
     });
     
     $("#btn-errata").click(function () {
         context["current-chant-detail"] = "errata";
-        $('div.chant-detail').html(context["current-chant"].ERRATA);
+
+        if (context["current-chant"].ERRATA != null)
+            $('div.chant-detail').html(context["current-chant"].ERRATA);
     });
 });
 
@@ -45,13 +51,16 @@ function AddUser() {
 
 function SetChantDetail() {
     if (context["current-chant-detail"] == "lyrics")
-        $('div.chant-detail').html(context["current-chant"].LYRICS);
+        if (context["current-chant"].LYRICS != null)
+            $('div.chant-detail').html(context["current-chant"].LYRICS.replace(/(\r\n|\n|\r)/gm, "<br>"));
     
     if (context["current-chant-detail"] == "history")
-        $('div.chant-detail').html(context["current-chant"].HISTORY);
+        if (context["current-chant"].HISTORY != null)
+            $('div.chant-detail').html(context["current-chant"].HISTORY);
     
     if (context["current-chant-detail"] == "errata")
-        $('div.chant-detail').html(context["current-chant"].ERRATA);
+        if (context["current-chant"].ERRATA!= null)
+            $('div.chant-detail').html(context["current-chant"].ERRATA);
 }
 
 function SetCurrentChant(chantId) {
