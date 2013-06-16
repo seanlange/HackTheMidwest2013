@@ -74,15 +74,15 @@ h2 {
 }
 
 h3 {
-    font-size: 1.0em;
+    font-size: 0.7em;
 }
 
 h4 {
-    font-size: 0.9em;
+    font-size: 0.5em;
 }
 
 h5, h6 {
-    font-size: 0.7em;
+    font-size: 0.4em;
 }
 
     h5 a:link, h5 a:visited, h5 a:active {
@@ -120,7 +120,7 @@ header .content-wrapper {
 
 footer {
     clear: both;
-    background-color: #e2e2e2;
+    background-color: #002b5c;
     font-size: .8em;
     height: 100px;
 }
