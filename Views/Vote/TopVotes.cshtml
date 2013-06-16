@@ -1,0 +1,12 @@
+﻿@model IEnumerable<KcCauldronCapo.Controllers.TopVote>
+
+@{
+    int counter = 1;
+}
+
+<div class="container-fluid">
+    @foreach (var topVote in Model.OrderByDescending(tv => tv.Count))
+    {
+        @topVote.Count @topVote.Chant<br/>
+    }
+</div>

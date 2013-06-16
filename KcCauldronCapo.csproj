@@ -335,6 +335,7 @@
     <Content Include="Views\Capo\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Vote\Index.cshtml" />
+    <Content Include="Views\Vote\TopVotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

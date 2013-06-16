@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using KcCauldronCapo.Model;
@@ -37,5 +38,40 @@ namespace KcCauldronCapo.Controllers
 
             return new EmptyResult();
         }
+
+        [HttpGet]
+        public ActionResult TopVotes()
+        {
+            var entities = new Hackathon_TestEntities();
+
+            var votes = entities.VOTES
+                .Include("Chant")
+                .Take(200)
+                .OrderByDescending(v => v.DATE_ADDED_DT_TM)
+                .ToList();
+
+            IList<TopVote> topVotes  = new List<TopVote>();
+
+            foreach (var vote in votes)
+            {
+                var topVote = topVotes.FirstOrDefault(v => v.Chant == vote.Chant.CHANT_NAME);
+
+                if (topVote == null)
+                {
+                    topVote = new TopVote {Chant = vote.Chant.CHANT_NAME};
+                    topVotes.Add(topVote);
+                }
+
+                topVote.Count++;
+            }
+
+            return View(topVotes);
+        }
+    }
+
+    public class TopVote
+    {
+        public string Chant { get; set; }
+        public int Count { get; set; }
     }
 }

@@ -59,7 +59,7 @@ function SetChantDetail() {
             $('div.chant-detail').html(context["current-chant"].HISTORY);
     
     if (context["current-chant-detail"] == "errata")
-        if (context["current-chant"].ERRATA!= null)
+        if (context["current-chant"].ERRATA != null)
             $('div.chant-detail').html(context["current-chant"].ERRATA);
 }
 
