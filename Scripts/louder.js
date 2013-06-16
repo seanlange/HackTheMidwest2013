@@ -99,6 +99,6 @@ function ClearVotes() {
     $.ajax({
         type: "POST",
         url: "/vote/clearvotes",
-        success: function () { window.location.href = '/vote/topvotes'; },
+        success: function () { window.location.href = '/Capo'; },
     });
 }
