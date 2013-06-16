@@ -41,7 +41,7 @@ function LoadLatestChant() {
         console.log("loading latest chant: " + data.CHANT_NAME);
         context["current-chant"] = data;
         $('div.latest-chant').html("<h3>Singing: " + data.CHANT_NAME + "</h3>");
-        SetAlbumImage();
+        //SetAlbumImage();
         SetChantDetail();
     });
 }
