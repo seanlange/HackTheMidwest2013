@@ -25,14 +25,16 @@ namespace KcCauldronCapo.Controllers
         [HttpPost]
         public ActionResult AddVote(int chantId)
         {
+            var entities = new Hackathon_TestEntities();
+            var lastVote = entities.VOTES.OrderByDescending(v => v.VOTE_ID).Take(1).FirstOrDefault();
+
             var vote = new Vote
             {
+                VOTE_ID = lastVote == null ? 1 : lastVote.VOTE_ID + 1,
                 CHANT_ID = chantId,
                 DATE_ADDED_DT_TM = DateTime.Now,
-                //USER_ID = Convert.ToInt32(Request.Cookies["userId"]),
             };
 
-            var entities = new Hackathon_TestEntities();
             entities.VOTES.Add(vote);
             entities.SaveChanges();
 
