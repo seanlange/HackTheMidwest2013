@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="Hackathon_TestModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="Hackathon_TestModelStoreContainer">
+          <EntitySet Name="ALERTS" EntityType="Hackathon_TestModel.Store.ALERTS" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CHANT_HISTORY" EntityType="Hackathon_TestModel.Store.CHANT_HISTORY" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CHANTS" EntityType="Hackathon_TestModel.Store.CHANTS" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="USER" EntityType="Hackathon_TestModel.Store.USER" store:Type="Tables" Schema="dbo" />
@@ -26,15 +27,24 @@
       [CURRENT_VOTES].[PERCENT] AS [PERCENT]
       FROM [dbo].[CURRENT_VOTES] AS [CURRENT_VOTES]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_VOTES_0" Association="Hackathon_TestModel.Store.FK_VOTES_0">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="VOTES" EntitySet="VOTES" />
+          <AssociationSet Name="FK_CHANT_HISTORY_0" Association="Hackathon_TestModel.Store.FK_CHANT_HISTORY_0">
+            <End Role="CHANTS" EntitySet="CHANTS" />
+            <End Role="CHANT_HISTORY" EntitySet="CHANT_HISTORY" />
           </AssociationSet>
           <AssociationSet Name="FK_VOTES_01" Association="Hackathon_TestModel.Store.FK_VOTES_01">
             <End Role="CHANTS" EntitySet="CHANTS" />
             <End Role="VOTES" EntitySet="VOTES" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ALERTS">
+          <Key>
+            <PropertyRef Name="ALERT_ID" />
+          </Key>
+          <Property Name="ALERT_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ALERT_TEXT" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EXPIRES_DT_TM" Type="datetime2" Nullable="false" />
+          <Property Name="SECTION" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="CHANT_HISTORY">
           <Key>
             <PropertyRef Name="CHANT_HISTORY_ID" />
@@ -58,7 +68,7 @@
           <Key>
             <PropertyRef Name="USER_ID" />
           </Key>
-          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="USER_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="DATE_ADDED_DT_TM" Type="datetime2" Nullable="false" />
           <Property Name="PHONE_NUMBER" Type="nvarchar" Nullable="false" MaxLength="11" />
           <Property Name="SECTION" Type="nvarchar" MaxLength="10" />
@@ -98,15 +108,15 @@
           <Property Name="COUNT" Type="float" />
           <Property Name="PERCENT" Type="varchar" MaxLength="6" />
         </EntityType>
-        <Association Name="FK_VOTES_0">
-          <End Role="USER" Type="Hackathon_TestModel.Store.USER" Multiplicity="1" />
-          <End Role="VOTES" Type="Hackathon_TestModel.Store.VOTES" Multiplicity="*" />
+        <Association Name="FK_CHANT_HISTORY_0">
+          <End Role="CHANTS" Type="Hackathon_TestModel.Store.CHANTS" Multiplicity="1" />
+          <End Role="CHANT_HISTORY" Type="Hackathon_TestModel.Store.CHANT_HISTORY" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="USER_ID" />
+            <Principal Role="CHANTS">
+              <PropertyRef Name="CHANT_ID" />
             </Principal>
-            <Dependent Role="VOTES">
-              <PropertyRef Name="USER_ID" />
+            <Dependent Role="CHANT_HISTORY">
+              <PropertyRef Name="CHANT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -145,6 +155,7 @@
           </AssociationSet>
           <EntitySet Name="CURRENT_DAY_USERS" EntityType="Hackathon_TestModel.CURRENT_DAY_USERS" />
           <EntitySet Name="CURRENT_VOTES" EntityType="Hackathon_TestModel.CURRENT_VOTES" />
+          <EntitySet Name="ALERTS" EntityType="Hackathon_TestModel.Alert" />
         </EntityContainer>
         <EntityType Name="ChantHistory">
           <Key>
@@ -244,6 +255,15 @@
           <Property Type="Double" Name="COUNT" />
           <Property Type="String" Name="PERCENT" MaxLength="6" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="ALERT_ID" />
+          </Key>
+          <Property Type="Int32" Name="ALERT_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ALERT_TEXT" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="EXPIRES_DT_TM" Nullable="false" Precision="7" />
+          <Property Type="String" Name="SECTION" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -308,6 +328,16 @@
                 <ScalarProperty Name="CHANT_NAME" ColumnName="CHANT_NAME" />
                 <ScalarProperty Name="CHANT_COUNT" ColumnName="CHANT_COUNT" />
                 <ScalarProperty Name="CHANT_ID" ColumnName="CHANT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALERTS">
+            <EntityTypeMapping TypeName="Hackathon_TestModel.Alert">
+              <MappingFragment StoreEntitySet="ALERTS">
+                <ScalarProperty Name="SECTION" ColumnName="SECTION" />
+                <ScalarProperty Name="EXPIRES_DT_TM" ColumnName="EXPIRES_DT_TM" />
+                <ScalarProperty Name="ALERT_TEXT" ColumnName="ALERT_TEXT" />
+                <ScalarProperty Name="ALERT_ID" ColumnName="ALERT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

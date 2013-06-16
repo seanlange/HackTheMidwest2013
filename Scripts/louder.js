@@ -33,6 +33,16 @@ function LoadLatestChant() {
     });
 }
 
+function AddUser() {
+    console.log($('form').serialize());
+    $.ajax({
+        type: "POST",
+        url: "/user/addUser",
+        data: $('user').serialize(),
+        dataType: "json"
+    });
+}
+
 function SetChantDetail() {
     if (context["current-chant-detail"] == "lyrics")
         $('div.chant-detail').html(context["current-chant"].LYRICS);

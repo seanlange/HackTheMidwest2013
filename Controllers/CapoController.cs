@@ -56,6 +56,12 @@ namespace KcCauldronCapo.Controllers
             return new EmptyResult();
         }
 
+        [HttpPost]
+        public ActionResult CreateAlert(string alert, string section)
+        {
+            return new EmptyResult();
+        }
+
         //
         // GET: /Capo/Edit/5
 
