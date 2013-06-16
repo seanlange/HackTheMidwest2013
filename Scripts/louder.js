@@ -84,3 +84,9 @@ function SetCurrentChant(chantId) {
         dataType: "json"
     });
 }
+
+function SetAlbumImage() {
+    console.log("setting background." + "'/content/images/" + context["current-chant"].ALBUM_ART);
+    $('div.latest-chant').css("background-image", "url('/content/images/" + context["current-chant"].ALBUM_ART + "')");
+    $('div.latest-chant').css("background-repeat", "no-repeat");
+}
