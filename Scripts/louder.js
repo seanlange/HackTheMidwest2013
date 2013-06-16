@@ -85,7 +85,8 @@ function SetCurrentChant(chantId) {
         type: "POST",
         url: "/capo/create",
         data: { 'chantId': chantId },
-        dataType: "json"
+        dataType: "json",
+        success: function () { location.reload(); }
     });
 }
 
