@@ -165,6 +165,7 @@
     <Compile Include="Common\HtmlHelperExtension.cs" />
     <Compile Include="Controllers\CapoController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Controllers\SubmissionController.cs" />
     <Compile Include="Controllers\LatestChantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -200,6 +201,9 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\User.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\USER_SUBMITTED_IDEAS.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Vote.cs">
@@ -354,6 +358,7 @@
     <Content Include="Views\Vote\Index.cshtml" />
     <Content Include="Views\Vote\TopVotes.cshtml" />
     <Content Include="Views\Alert\Index.cshtml" />
+    <Content Include="Views\Submission\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
