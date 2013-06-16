@@ -40,7 +40,8 @@ function LoadLatestChant() {
     $.get('/api/latestchant', function (data) {
         console.log("loading latest chant: " + data.CHANT_NAME);
         context["current-chant"] = data;
-        $('div.latest-chant').html("<h3>Latest: " + data.CHANT_NAME + "</h3>");
+        $('div.latest-chant').html("<h3>Singing: " + data.CHANT_NAME + "</h3>");
+        //SetAlbumImage();
         SetChantDetail();
     });
 }
@@ -53,6 +54,8 @@ function Vote(chantId) {
         url: "/vote/addVote",
         dataType: "json"
     });
+
+    apprise("Thanks for voting!");
 }
 
 function SetChantDetail() {
@@ -87,6 +90,14 @@ function SetCurrentChant(chantId) {
 
 function SetAlbumImage() {
     console.log("setting background." + "'/content/images/" + context["current-chant"].ALBUM_ART);
-    $('div.latest-chant').css("background-image", "url('/content/images/" + context["current-chant"].ALBUM_ART + "')");
-    $('div.latest-chant').css("background-repeat", "no-repeat");
+    $('div.latest-chant-container').css("background-image", "url('/content/images/" + context["current-chant"].ALBUM_ART + "')");
+    $('div.latest-chant-container').css("background-repeat", "no-repeat");
+}
+
+function ClearVotes() {
+    $.ajax({
+        type: "POST",
+        url: "/vote/clearvotes",
+        success: function () { window.location.href = '/vote/topvotes'; },
+    });
 }

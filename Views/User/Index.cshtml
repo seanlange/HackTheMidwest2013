@@ -48,5 +48,8 @@
         <button class="btn btn-primary">Sign Up!</button>
     </form>
 } else {
-    @Request.Cookies["number"].Value  @Request.Cookies["section"].Value   
+    @:Phone Number:
+    @Request.Cookies["number"].Value
+    @:<br/>Section:
+    @Request.Cookies["section"].Value   
 }
