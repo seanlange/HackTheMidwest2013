@@ -17,6 +17,7 @@ namespace KcCauldronCapo.Controllers
             var chants = entities
                 .CHANTS
                 .OrderBy(c => c.CHANT_NAME)
+                .Where(c => c.VOTING_ACTIVE == 1)
                 .ToList();
 
             return View(chants);
