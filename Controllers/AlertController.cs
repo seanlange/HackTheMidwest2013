@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using KcCauldronCapo.Model;
+using Twilio;
+using System.Web.Configuration;
 
 
 namespace KcCauldronCapo.Controllers
@@ -21,9 +23,18 @@ namespace KcCauldronCapo.Controllers
                 .Users1
                 .ToList();
 
+            var AccountSid = WebConfigurationManager.AppSettings["AccountSid"];
+            var AuthToken = WebConfigurationManager.AppSettings["AuthToken"];
+            var fromNumber = WebConfigurationManager.AppSettings["FromNumber"];
+
             foreach(var user in userList)
             {
+                var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
+                var formattedPhoneNumber = "+1" + user.PHONE_NUMBER;
+
+                var textMsg = twilio.SendSmsMessage(fromNumber, formattedPhoneNumber, message, "");
+ 
             }
 
             return View("Index");

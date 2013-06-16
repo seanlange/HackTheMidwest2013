@@ -1,0 +1,18 @@
+﻿<form action="/Submission/SubmitSong" method="POST">
+    Message: <textarea name="message"
+        rows="4"
+        cols="20"
+        maxlength="100"
+        ></textarea>
+    <br />
+    <button class="btn btn-primary">Submit Song!</button>
+</form>
+
+@model IEnumerable<KcCauldronCapo.Model.USER_SUBMITTED_IDEAS>
+
+<div class="container-fluid">
+    @foreach (var submission in Model)
+    {
+        <label>@submission.LYRICS</label>
+    }
+</div>

@@ -12,20 +12,13 @@ namespace KcCauldronCapo.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class USER_SUBMITTED_IDEAS
     {
-        public User()
-        {
-            this.Votes = new HashSet<Vote>();
-            this.USER_SUBMITTED_IDEAS = new HashSet<USER_SUBMITTED_IDEAS>();
-        }
-    
+        public int USER_SUBMITTED_IDEAS_ID { get; set; }
         public int USER_ID { get; set; }
-        public System.DateTime DATE_ADDED_DT_TM { get; set; }
-        public string PHONE_NUMBER { get; set; }
-        public string SECTION { get; set; }
+        public string LYRICS { get; set; }
+        public Nullable<System.DateTime> SUBMISSION_DT_TM { get; set; }
     
-        public virtual ICollection<Vote> Votes { get; set; }
-        public virtual ICollection<USER_SUBMITTED_IDEAS> USER_SUBMITTED_IDEAS { get; set; }
+        public virtual User USER { get; set; }
     }
 }

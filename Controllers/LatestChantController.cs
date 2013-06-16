@@ -15,7 +15,7 @@ namespace KcCauldronCapo.Controllers
             var chantHistory = entities
                 .ChantHistories
                 .Include("Chant")
-                .OrderByDescending(c => c.DATE_PLAYED_DT_TM)
+                .OrderByDescending(c => c.CHANT_HISTORY_ID)
                 .FirstOrDefault();
 
             if (chantHistory != null)

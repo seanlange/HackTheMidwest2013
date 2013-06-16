@@ -10,10 +10,15 @@
           <EntitySet Name="CHANT_HISTORY" EntityType="Hackathon_TestModel.Store.CHANT_HISTORY" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CHANTS" EntityType="Hackathon_TestModel.Store.CHANTS" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="USER" EntityType="Hackathon_TestModel.Store.USER" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="USER_SUBMITTED_IDEAS" EntityType="Hackathon_TestModel.Store.USER_SUBMITTED_IDEAS" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="VOTES" EntityType="Hackathon_TestModel.Store.VOTES" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_CHANT_HISTORY_0" Association="Hackathon_TestModel.Store.FK_CHANT_HISTORY_0">
             <End Role="CHANTS" EntitySet="CHANTS" />
             <End Role="CHANT_HISTORY" EntitySet="CHANT_HISTORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_SUBMITTED_IDEAS_0" Association="Hackathon_TestModel.Store.FK_USER_SUBMITTED_IDEAS_0">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="USER_SUBMITTED_IDEAS" EntitySet="USER_SUBMITTED_IDEAS" />
           </AssociationSet>
           <AssociationSet Name="FK_VOTES_01" Association="Hackathon_TestModel.Store.FK_VOTES_01">
             <End Role="CHANTS" EntitySet="CHANTS" />
@@ -59,6 +64,15 @@
           <Property Name="PHONE_NUMBER" Type="nvarchar" Nullable="false" MaxLength="11" />
           <Property Name="SECTION" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="USER_SUBMITTED_IDEAS">
+          <Key>
+            <PropertyRef Name="USER_SUBMITTED_IDEAS_ID" />
+          </Key>
+          <Property Name="USER_SUBMITTED_IDEAS_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="LYRICS" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="SUBMISSION_DT_TM" Type="date" />
+        </EntityType>
         <EntityType Name="VOTES">
           <Key>
             <PropertyRef Name="VOTE_ID" />
@@ -77,6 +91,18 @@
             </Principal>
             <Dependent Role="CHANT_HISTORY">
               <PropertyRef Name="CHANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_SUBMITTED_IDEAS_0">
+          <End Role="USER" Type="Hackathon_TestModel.Store.USER" Multiplicity="1" />
+          <End Role="USER_SUBMITTED_IDEAS" Type="Hackathon_TestModel.Store.USER_SUBMITTED_IDEAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="USER_SUBMITTED_IDEAS">
+              <PropertyRef Name="USER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -114,6 +140,11 @@
             <End Role="VOTES" EntitySet="VOTES" />
           </AssociationSet>
           <EntitySet Name="ALERTS" EntityType="Hackathon_TestModel.Alert" />
+          <EntitySet Name="USER_SUBMITTED_IDEAS" EntityType="Hackathon_TestModel.USER_SUBMITTED_IDEAS" />
+          <AssociationSet Name="FK_USER_SUBMITTED_IDEAS_0" Association="Hackathon_TestModel.FK_USER_SUBMITTED_IDEAS_0">
+            <End Role="User" EntitySet="Users1" />
+            <End Role="USER_SUBMITTED_IDEAS" EntitySet="USER_SUBMITTED_IDEAS" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ChantHistory">
           <Key>
@@ -147,6 +178,7 @@
           <Property Name="PHONE_NUMBER" Type="String" Nullable="false" MaxLength="11" Unicode="true" FixedLength="false" />
           <Property Name="SECTION" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Votes" Relationship="Hackathon_TestModel.FK_VOTES_0" FromRole="USER" ToRole="VOTES" />
+          <NavigationProperty Name="USER_SUBMITTED_IDEAS" Relationship="Hackathon_TestModel.FK_USER_SUBMITTED_IDEAS_0" FromRole="User" ToRole="USER_SUBMITTED_IDEAS" />
         </EntityType>
         <EntityType Name="Vote">
           <Key>
@@ -204,6 +236,28 @@
           <Property Type="DateTime" Name="EXPIRES_DT_TM" Nullable="false" Precision="7" />
           <Property Type="String" Name="SECTION" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="USER_SUBMITTED_IDEAS">
+          <Key>
+            <PropertyRef Name="USER_SUBMITTED_IDEAS_ID" />
+          </Key>
+          <Property Type="Int32" Name="USER_SUBMITTED_IDEAS_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="USER_ID" Nullable="false" />
+          <Property Type="String" Name="LYRICS" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USER" Relationship="Hackathon_TestModel.FK_USER_SUBMITTED_IDEAS_0" FromRole="USER_SUBMITTED_IDEAS" ToRole="User" />
+          <Property Type="DateTime" Name="SUBMISSION_DT_TM" Precision="0" />
+        </EntityType>
+        <Association Name="FK_USER_SUBMITTED_IDEAS_0">
+          <End Type="Hackathon_TestModel.User" Role="User" Multiplicity="1" />
+          <End Type="Hackathon_TestModel.USER_SUBMITTED_IDEAS" Role="USER_SUBMITTED_IDEAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="USER_SUBMITTED_IDEAS">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -260,6 +314,16 @@
                 <ScalarProperty Name="EXPIRES_DT_TM" ColumnName="EXPIRES_DT_TM" />
                 <ScalarProperty Name="ALERT_TEXT" ColumnName="ALERT_TEXT" />
                 <ScalarProperty Name="ALERT_ID" ColumnName="ALERT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_SUBMITTED_IDEAS">
+            <EntityTypeMapping TypeName="Hackathon_TestModel.USER_SUBMITTED_IDEAS">
+              <MappingFragment StoreEntitySet="USER_SUBMITTED_IDEAS">
+                <ScalarProperty Name="SUBMISSION_DT_TM" ColumnName="SUBMISSION_DT_TM" />
+                <ScalarProperty Name="LYRICS" ColumnName="LYRICS" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="USER_SUBMITTED_IDEAS_ID" ColumnName="USER_SUBMITTED_IDEAS_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
