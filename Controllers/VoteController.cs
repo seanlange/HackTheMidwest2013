@@ -24,6 +24,19 @@ namespace KcCauldronCapo.Controllers
         }
 
         [HttpPost]
+        public ActionResult ClearVotes()
+        {
+            var entities = new Hackathon_TestEntities();
+
+            foreach (var vote in entities.VOTES.ToList())
+                entities.VOTES.Remove(vote);
+
+            entities.SaveChanges();
+
+            return new EmptyResult();
+        }
+
+        [HttpPost]
         public ActionResult AddVote(int chantId)
         {
             var entities = new Hackathon_TestEntities();

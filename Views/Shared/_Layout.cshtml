@@ -10,9 +10,11 @@
         }
     </style>
     <link href="~/Content/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="~/Content/apprise.min.css" rel="stylesheet">
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/louder.js"></script>
+    <script src="~/Scripts/apprise-1.5.min.js"></script>
     <meta name="viewport" content="width=device-width" />
 </head>
 <body>
@@ -37,8 +39,10 @@
             </div>  
         </div>
         </div>
-        <div class="container" style="padding: 10px;">
-            <div class="latest-chant"></div>
+        <div class="container" style="padding: 0 10px 10px 10px;">
+            <div class="latest-chant-container" style="width: 320px; height: 180px; padding-bottom: 5px;">
+                <div class="latest-chant" style="color: #FFFFFF; background-color:rgba(255,0,0,0.5);"></div>
+            </div>
 
             @RenderBody()
         </div>
