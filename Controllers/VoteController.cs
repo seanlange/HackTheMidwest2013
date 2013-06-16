@@ -28,7 +28,7 @@ namespace KcCauldronCapo.Controllers
             {
                 CHANT_ID = chantId,
                 DATE_ADDED_DT_TM = DateTime.Now,
-                USER_ID = Convert.ToInt32(Request.Cookies["userId"]),
+                //USER_ID = Convert.ToInt32(Request.Cookies["userId"]),
             };
 
             var entities = new Hackathon_TestEntities();

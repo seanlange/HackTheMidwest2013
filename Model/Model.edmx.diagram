@@ -12,9 +12,7 @@
         <AssociationConnector Association="Hackathon_TestModel.FK_CHANT_HISTORY_0" ManuallyRouted="false" />
         <AssociationConnector Association="Hackathon_TestModel.FK_VOTES_01" ManuallyRouted="false" />
         <AssociationConnector Association="Hackathon_TestModel.FK_VOTES_0" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Hackathon_TestModel.CURRENT_DAY_USERS" Width="2.375" PointX="4.125" PointY="4.125" />
-        <EntityTypeShape EntityType="Hackathon_TestModel.CURRENT_VOTES" Width="2.375" PointX="7.375" PointY="4.125" />
-        <EntityTypeShape EntityType="Hackathon_TestModel.Alert" Width="1.5" PointX="0.5" PointY="7" />
+        <EntityTypeShape EntityType="Hackathon_TestModel.Alert" Width="1.5" PointX="3.75" PointY="4.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

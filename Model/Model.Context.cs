@@ -29,8 +29,6 @@ namespace KcCauldronCapo.Model
         public DbSet<Chant> CHANTS { get; set; }
         public DbSet<User> Users1 { get; set; }
         public DbSet<Vote> VOTES { get; set; }
-        public DbSet<CURRENT_DAY_USERS> CURRENT_DAY_USERS { get; set; }
-        public DbSet<CURRENT_VOTES> CURRENT_VOTES { get; set; }
         public DbSet<Alert> ALERTS { get; set; }
     }
 }

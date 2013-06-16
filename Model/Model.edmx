@@ -11,22 +11,6 @@
           <EntitySet Name="CHANTS" EntityType="Hackathon_TestModel.Store.CHANTS" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="USER" EntityType="Hackathon_TestModel.Store.USER" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="VOTES" EntityType="Hackathon_TestModel.Store.VOTES" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CURRENT_DAY_USERS" EntityType="Hackathon_TestModel.Store.CURRENT_DAY_USERS" store:Type="Views" store:Schema="dbo" store:Name="CURRENT_DAY_USERS">
-            <DefiningQuery>SELECT 
-      [CURRENT_DAY_USERS].[USER_ID] AS [USER_ID], 
-      [CURRENT_DAY_USERS].[PHONE_NUMBER] AS [PHONE_NUMBER], 
-      [CURRENT_DAY_USERS].[SECTION] AS [SECTION]
-      FROM [dbo].[CURRENT_DAY_USERS] AS [CURRENT_DAY_USERS]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="CURRENT_VOTES" EntityType="Hackathon_TestModel.Store.CURRENT_VOTES" store:Type="Views" store:Schema="dbo" store:Name="CURRENT_VOTES">
-            <DefiningQuery>SELECT 
-      [CURRENT_VOTES].[CHANT_ID] AS [CHANT_ID], 
-      [CURRENT_VOTES].[CHANT_COUNT] AS [CHANT_COUNT], 
-      [CURRENT_VOTES].[CHANT_NAME] AS [CHANT_NAME], 
-      [CURRENT_VOTES].[COUNT] AS [COUNT], 
-      [CURRENT_VOTES].[PERCENT] AS [PERCENT]
-      FROM [dbo].[CURRENT_VOTES] AS [CURRENT_VOTES]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_CHANT_HISTORY_0" Association="Hackathon_TestModel.Store.FK_CHANT_HISTORY_0">
             <End Role="CHANTS" EntitySet="CHANTS" />
             <End Role="CHANT_HISTORY" EntitySet="CHANT_HISTORY" />
@@ -81,33 +65,7 @@
           <Property Name="VOTE_ID" Type="int" Nullable="false" />
           <Property Name="CHANT_ID" Type="int" Nullable="false" />
           <Property Name="DATE_ADDED_DT_TM" Type="datetime2" Nullable="false" />
-          <Property Name="USER_ID" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'Hackathon_Test.dbo.CURRENT_DAY_USERS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
-        <EntityType Name="CURRENT_DAY_USERS">
-          <Key>
-            <PropertyRef Name="USER_ID" />
-            <PropertyRef Name="PHONE_NUMBER" />
-          </Key>
-          <Property Name="USER_ID" Type="int" Nullable="false" />
-          <Property Name="PHONE_NUMBER" Type="nvarchar" Nullable="false" MaxLength="13" />
-          <Property Name="SECTION" Type="nvarchar" MaxLength="10" />
-        </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'Hackathon_Test.dbo.CURRENT_VOTES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
-        <EntityType Name="CURRENT_VOTES">
-          <Key>
-            <PropertyRef Name="CHANT_ID" />
-            <PropertyRef Name="CHANT_NAME" />
-          </Key>
-          <Property Name="CHANT_ID" Type="int" Nullable="false" />
-          <Property Name="CHANT_COUNT" Type="float" />
-          <Property Name="CHANT_NAME" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="COUNT" Type="float" />
-          <Property Name="PERCENT" Type="varchar" MaxLength="6" />
+          <Property Name="USER_ID" Type="int" />
         </EntityType>
         <Association Name="FK_CHANT_HISTORY_0">
           <End Role="CHANTS" Type="Hackathon_TestModel.Store.CHANTS" Multiplicity="1" />
@@ -154,8 +112,6 @@
             <End Role="USER" EntitySet="Users1" />
             <End Role="VOTES" EntitySet="VOTES" />
           </AssociationSet>
-          <EntitySet Name="CURRENT_DAY_USERS" EntityType="Hackathon_TestModel.CURRENT_DAY_USERS" />
-          <EntitySet Name="CURRENT_VOTES" EntityType="Hackathon_TestModel.CURRENT_VOTES" />
           <EntitySet Name="ALERTS" EntityType="Hackathon_TestModel.Alert" />
         </EntityContainer>
         <EntityType Name="ChantHistory">
@@ -197,7 +153,7 @@
           <Property Name="VOTE_ID" Type="Int32" Nullable="false" />
           <Property Name="CHANT_ID" Type="Int32" Nullable="false" />
           <Property Name="DATE_ADDED_DT_TM" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="USER_ID" Type="Int32" Nullable="false" />
+          <Property Name="USER_ID" Type="Int32" />
           <NavigationProperty Name="Chant" Relationship="Hackathon_TestModel.FK_VOTES_01" FromRole="VOTES" ToRole="CHANTS" />
           <NavigationProperty Name="User" Relationship="Hackathon_TestModel.FK_VOTES_0" FromRole="VOTES" ToRole="USER" />
         </EntityType>
@@ -226,7 +182,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VOTES_0">
-          <End Role="USER" Type="Hackathon_TestModel.User" Multiplicity="1" />
+          <End Role="USER" Type="Hackathon_TestModel.User" Multiplicity="0..1" />
           <End Role="VOTES" Type="Hackathon_TestModel.Vote" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
@@ -237,26 +193,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CURRENT_DAY_USERS">
-          <Key>
-            <PropertyRef Name="USER_ID" />
-            <PropertyRef Name="PHONE_NUMBER" />
-          </Key>
-          <Property Type="Int32" Name="USER_ID" Nullable="false" />
-          <Property Type="String" Name="PHONE_NUMBER" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="SECTION" MaxLength="10" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="CURRENT_VOTES">
-          <Key>
-            <PropertyRef Name="CHANT_ID" />
-            <PropertyRef Name="CHANT_NAME" />
-          </Key>
-          <Property Type="Int32" Name="CHANT_ID" Nullable="false" />
-          <Property Type="Double" Name="CHANT_COUNT" />
-          <Property Type="String" Name="CHANT_NAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Double" Name="COUNT" />
-          <Property Type="String" Name="PERCENT" MaxLength="6" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Alert">
           <Key>
             <PropertyRef Name="ALERT_ID" />
@@ -311,26 +247,6 @@
                 <ScalarProperty Name="CHANT_ID" ColumnName="CHANT_ID" />
                 <ScalarProperty Name="DATE_ADDED_DT_TM" ColumnName="DATE_ADDED_DT_TM" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CURRENT_DAY_USERS">
-            <EntityTypeMapping TypeName="Hackathon_TestModel.CURRENT_DAY_USERS">
-              <MappingFragment StoreEntitySet="CURRENT_DAY_USERS">
-                <ScalarProperty Name="SECTION" ColumnName="SECTION" />
-                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CURRENT_VOTES">
-            <EntityTypeMapping TypeName="Hackathon_TestModel.CURRENT_VOTES">
-              <MappingFragment StoreEntitySet="CURRENT_VOTES">
-                <ScalarProperty Name="PERCENT" ColumnName="PERCENT" />
-                <ScalarProperty Name="COUNT" ColumnName="COUNT" />
-                <ScalarProperty Name="CHANT_NAME" ColumnName="CHANT_NAME" />
-                <ScalarProperty Name="CHANT_COUNT" ColumnName="CHANT_COUNT" />
-                <ScalarProperty Name="CHANT_ID" ColumnName="CHANT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

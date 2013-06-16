@@ -39,12 +39,12 @@ function LoadLatestChant() {
     });
 }
 
-function AddUser() {
-    console.log($('form').serialize());
+function Vote(chantId) {
+    console.log("voting for " + chantId);
     $.ajax({
         type: "POST",
-        url: "/user/addUser",
-        data: $('user').serialize(),
+        data: {'chantId': chantId },
+        url: "/vote/addVote",
         dataType: "json"
     });
 }
