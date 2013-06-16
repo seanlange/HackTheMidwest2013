@@ -152,6 +152,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\HtmlHelperExtension.cs" />
     <Compile Include="Controllers\CapoController.cs" />
+    <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\LatestChantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -338,6 +339,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Vote\Index.cshtml" />
     <Content Include="Views\Vote\TopVotes.cshtml" />
+    <Content Include="Views\Alert\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
