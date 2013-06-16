@@ -150,6 +150,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\HtmlHelperExtension.cs" />
     <Compile Include="Controllers\CapoController.cs" />
     <Compile Include="Controllers\LatestChantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
