@@ -26,6 +26,7 @@ namespace KcCauldronCapo.Model
         public string LISTENLINK { get; set; }
         public string HISTORY { get; set; }
         public byte VOTING_ACTIVE { get; set; }
+        public string ALBUM_ART { get; set; }
     
         public virtual ICollection<Vote> Votes { get; set; }
     }

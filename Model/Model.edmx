@@ -48,6 +48,7 @@
           <Property Name="LISTENLINK" Type="nvarchar" MaxLength="200" />
           <Property Name="HISTORY" Type="nvarchar(max)" />
           <Property Name="VOTING_ACTIVE" Type="tinyint" Nullable="false" />
+          <Property Name="ALBUM_ART" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -135,6 +136,7 @@
           <Property Name="HISTORY" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Votes" Relationship="Hackathon_TestModel.FK_VOTES_01" FromRole="CHANTS" ToRole="VOTES" />
           <Property Type="Byte" Name="VOTING_ACTIVE" Nullable="false" />
+          <Property Type="String" Name="ALBUM_ART" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -220,6 +222,7 @@
           <EntitySetMapping Name="CHANTS">
             <EntityTypeMapping TypeName="Hackathon_TestModel.Chant">
               <MappingFragment StoreEntitySet="CHANTS">
+                <ScalarProperty Name="ALBUM_ART" ColumnName="ALBUM_ART" />
                 <ScalarProperty Name="VOTING_ACTIVE" ColumnName="VOTING_ACTIVE" />
                 <ScalarProperty Name="CHANT_ID" ColumnName="CHANT_ID" />
                 <ScalarProperty Name="CHANT_NAME" ColumnName="CHANT_NAME" />
