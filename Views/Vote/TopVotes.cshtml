@@ -7,6 +7,10 @@
 <div class="container-fluid">
     @foreach (var topVote in Model.OrderByDescending(tv => tv.Count))
     {
-        @topVote.Count @topVote.Chant<br/>
+        @:<span style="background-color: #EEEEEE;">
+        @topVote.Count
+        @:</span>
+        @:
+        @topVote.Chant<br/>
     }
 </div>

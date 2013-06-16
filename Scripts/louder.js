@@ -40,7 +40,7 @@ function LoadLatestChant() {
     $.get('/api/latestchant', function (data) {
         console.log("loading latest chant: " + data.CHANT_NAME);
         context["current-chant"] = data;
-        $('div.latest-chant').html("<b>Latest:  </b>" + data.CHANT_NAME);
+        $('div.latest-chant').html("<h3>Latest: " + data.CHANT_NAME + "</h3>");
         SetChantDetail();
     });
 }

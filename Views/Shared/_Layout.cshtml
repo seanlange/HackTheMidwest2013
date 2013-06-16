@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="brand" href="#">KCCauldron: Louder!</a>
+                <a class="brand" href="/">KCCauldron: Louder!</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         @Html.MenuLink("Notifications", "Index", "User")
@@ -37,11 +37,12 @@
                 <!--/.nav-collapse -->
             </div>
         </div>
-        <div class="container">
+        <div class="container" style="padding: 10px;">
             <div class="latest-chant"></div>
 
             @RenderBody()
         </div>
         <!-- /container -->
+    </div>
 </body>
 </html>
